@@ -1,4 +1,4 @@
-package org.laboratory.libraryapp.web;
+package org.laboratory.libraryapp.web.rest;
 
 import org.laboratory.libraryapp.model.Book;
 import org.laboratory.libraryapp.service.AuthorService;
@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class BooksController {
+public class BooksRestController {
 
     private final AuthorService authorService;
     private final BookService bookService;
     private final CountryService countryService;
 
-    public BooksController(AuthorService authorService, BookService bookService, CountryService countryService) {
+    public BooksRestController(AuthorService authorService, BookService bookService, CountryService countryService) {
         this.authorService = authorService;
         this.bookService = bookService;
         this.countryService = countryService;
