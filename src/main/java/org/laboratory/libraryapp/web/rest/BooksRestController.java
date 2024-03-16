@@ -4,6 +4,7 @@ import org.laboratory.libraryapp.model.Book;
 import org.laboratory.libraryapp.service.AuthorService;
 import org.laboratory.libraryapp.service.BookService;
 import org.laboratory.libraryapp.service.CountryService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,7 @@ public class BooksRestController {
      * This returns the list (JSON format) of all the books in the database
      * @return bookService.listAllBooks().
      */
+    @CrossOrigin()
     @GetMapping({"/", "/books"})
     public List<Book> showAllBooks()
     {

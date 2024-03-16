@@ -1,5 +1,6 @@
 package org.laboratory.libraryapp.service.implementation;
 
+import lombok.RequiredArgsConstructor;
 import org.laboratory.libraryapp.model.Author;
 import org.laboratory.libraryapp.model.Country;
 import org.laboratory.libraryapp.model.exceptions.InvalidAuthorIdException;
@@ -12,15 +13,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AuthorServiceImplementation implements AuthorService {
 
     private final AuthorRepository authorRepository;
     private final CountryRepository countryRepository;
-
-    public AuthorServiceImplementation(AuthorRepository authorRepository, CountryRepository countryRepository) {
-        this.authorRepository = authorRepository;
-        this.countryRepository = countryRepository;
-    }
 
     @Override
     public List<Author> listAllAuthors() {

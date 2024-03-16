@@ -1,9 +1,5 @@
 package org.laboratory.libraryapp.model.dto;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import org.laboratory.libraryapp.model.Author;
 import org.laboratory.libraryapp.model.Category;
