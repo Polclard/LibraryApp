@@ -31,40 +31,35 @@ public class BooksRestController {
     @GetMapping({"/", "/books"})
     public List<Book> showAllBooks()
     {
-        List<Book> allBooks = bookService.listAllBooks();
-        return allBooks;
+        return bookService.listAllBooks();
     }
 
     @CrossOrigin()
     @PostMapping(value = "/addBook", consumes = MediaType.APPLICATION_JSON_VALUE )
-    public String addBook(@RequestBody BookDto book)
+    public void addBook(@RequestBody BookDto book)
     {
         this.bookService.create(book.getName(), book.getCategory(), book.getAuthorId(), book.getAvailableCopies());
-        return "redirect:/books";
     }
 
     @CrossOrigin
     @PostMapping(value = "/deleteBook/{id}")
-    public String deleteBook(@PathVariable Long id)
+    public void deleteBook(@PathVariable Long id)
     {
         this.bookService.delete(id);
-        return "redirect:/books";
     }
 
     @CrossOrigin
     @PostMapping(value = "/changeRentedStatus/{id}")
-    public String changeRentedStatus(@PathVariable Long id, @RequestParam boolean status)
+    public void changeRentedStatus(@PathVariable Long id, @RequestParam boolean status)
     {
         this.bookService.changeRentedStatus(id, status);
-        return "redirect:/books";
     }
 
     @CrossOrigin
     @PostMapping(value = "/editBook/{id}")
-    public String editBook(@PathVariable Long id, @RequestBody BookDto book)
+    public void editBook(@PathVariable Long id, @RequestBody BookDto book)
     {
         this.bookService.update(id, book.getName(), book.getCategory(), book.getAuthorId(), book.getAvailableCopies());
-        return "redirect:/books";
     }
 
 }

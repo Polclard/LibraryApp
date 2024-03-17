@@ -24,26 +24,23 @@ public class AuthorRestController {
 
     @CrossOrigin()
     @PostMapping(value = "/addAuthor", consumes = MediaType.APPLICATION_JSON_VALUE )
-    public String addBook(@RequestBody AuthorDto author)
+    public void addAuthor(@RequestBody AuthorDto author)
     {
         this.authorService.create(author.getName(), author.getSurname(), author.getCountryId());
-        return "redirect:/authors";
     }
 
     @CrossOrigin
     @PostMapping(value = "/deleteAuthor/{id}")
-    public String deleteBook(@PathVariable Long id)
+    public void deleteAuthor(@PathVariable Long id)
     {
         this.authorService.delete(id);
-        return "redirect:/authors";
     }
 
 
     @CrossOrigin
     @PostMapping(value = "/editAuthor/{id}")
-    public String editBook(@PathVariable Long id, @RequestBody AuthorDto author)
+    public void editAuthor(@PathVariable Long id, @RequestBody AuthorDto author)
     {
         this.authorService.update(id, author.getName(), author.getSurname(), author.getCountryId());
-        return "redirect:/authors";
     }
 }
