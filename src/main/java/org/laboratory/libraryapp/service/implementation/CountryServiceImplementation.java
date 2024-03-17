@@ -40,6 +40,9 @@ public class CountryServiceImplementation implements CountryService {
     public Country update(Long id, String name, String continent) {
         Country country = countryRepository.findById(id).orElseThrow(InvalidCountryIdException::new);
 
+        country.setName(name);
+        country.setContinent(continent);
+
         countryRepository.save(country);
 
         return country;
