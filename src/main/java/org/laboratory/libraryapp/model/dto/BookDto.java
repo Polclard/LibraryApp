@@ -1,22 +1,16 @@
 package org.laboratory.libraryapp.model.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.laboratory.libraryapp.model.Author;
+import lombok.NoArgsConstructor;
 import org.laboratory.libraryapp.model.Category;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookDto {
-    private Long id;
     private String name;
     private Category category;
-    private Author author;
+    private long authorId;
     private int availableCopies;
-
-    public BookDto(Long id, String name, Category category, Author author, int availableCopies) {
-        this.id = id;
-        this.name = name;
-        this.category = category;
-        this.author = author;
-        this.availableCopies = availableCopies;
-    }
 }

@@ -35,7 +35,6 @@ public interface BookService {
      * @throws org.laboratory.libraryapp.model.exceptions.InvalidAuthorIdException when there is no author with the given id
      */
     Book create(String name, Category category, Long author, int availableCopies);
-
     /**
      * This method is used to update a Book, and save it in the database.
      *
