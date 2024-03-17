@@ -64,4 +64,15 @@ public class BookServiceImplementation implements BookService {
 
         return book;
     }
+
+    @Override
+    public Book changeRentedStatus(Long bookId, boolean status) {
+        Book book = bookRepository.findById(bookId).orElseThrow(InvalidBookIdException::new);
+
+        book.setRented(status);
+
+        bookRepository.save(book);
+
+        return book;
+    }
 }

@@ -23,6 +23,7 @@ public class Book {
         this.category = category;
         this.author = author;
         this.availableCopies = availableCopies;
+        this.rented = false;
     }
 
     @Id
@@ -33,6 +34,15 @@ public class Book {
     @ManyToOne
     private Author author;
     private int availableCopies;
+    private boolean rented;
+
+    public boolean isRented() {
+        return rented;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
+    }
 
     public Long getId() {
         return id;

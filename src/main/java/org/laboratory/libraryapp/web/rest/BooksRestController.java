@@ -1,8 +1,6 @@
 package org.laboratory.libraryapp.web.rest;
 
-import org.laboratory.libraryapp.model.Author;
 import org.laboratory.libraryapp.model.Book;
-import org.laboratory.libraryapp.model.Category;
 import org.laboratory.libraryapp.model.dto.BookDto;
 import org.laboratory.libraryapp.service.AuthorService;
 import org.laboratory.libraryapp.service.BookService;
@@ -38,12 +36,35 @@ public class BooksRestController {
     }
 
     @CrossOrigin()
-    @PostMapping(value = "/addBook", consumes= MediaType.APPLICATION_JSON_VALUE )
+    @PostMapping(value = "/addBook", consumes = MediaType.APPLICATION_JSON_VALUE )
     public String addBook(@RequestBody BookDto book)
     {
         this.bookService.create(book.getName(), book.getCategory(), book.getAuthorId(), book.getAvailableCopies());
         return "redirect:/books";
     }
 
+    @CrossOrigin
+    @PostMapping(value = "/deleteBook/{id}")
+    public String deleteBook(@PathVariable Long id)
+    {
+        this.bookService.delete(id);
+        return "redirect:/books";
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "/changeRentedStatus/{id}")
+    public String changeRentedStatus(@PathVariable Long id, @RequestParam boolean status)
+    {
+        this.bookService.changeRentedStatus(id, status);
+        return "redirect:/books";
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "/editBook/{id}")
+    public String editBook(@PathVariable Long id, @RequestBody BookDto book)
+    {
+        this.bookService.update(id, book.getName(), book.getCategory(), book.getAuthorId(), book.getAvailableCopies());
+        return "redirect:/books";
+    }
 
 }
