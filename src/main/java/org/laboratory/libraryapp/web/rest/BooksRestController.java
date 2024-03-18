@@ -56,6 +56,13 @@ public class BooksRestController {
     }
 
     @CrossOrigin
+    @PostMapping(value = "/rentCopiesFromBook/{id}")
+    public void rentCopiesFromBook(@PathVariable Long id, @RequestParam int numberOfCopiesToRent)
+    {
+        this.bookService.rentCopiesFromBook(id, numberOfCopiesToRent);
+    }
+
+    @CrossOrigin
     @PostMapping(value = "/editBook/{id}")
     public void editBook(@PathVariable Long id, @RequestBody BookDto book)
     {

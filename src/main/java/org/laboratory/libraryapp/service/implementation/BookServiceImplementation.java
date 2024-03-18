@@ -5,6 +5,7 @@ import org.laboratory.libraryapp.model.Category;
 import org.laboratory.libraryapp.model.exceptions.InvalidAuthorIdException;
 import org.laboratory.libraryapp.model.exceptions.InvalidBookIdException;
 import org.laboratory.libraryapp.model.exceptions.InvalidCountryIdException;
+import org.laboratory.libraryapp.model.exceptions.NotEnoughNumberOfCopiesException;
 import org.laboratory.libraryapp.repository.AuthorRepository;
 import org.laboratory.libraryapp.repository.BookRepository;
 import org.laboratory.libraryapp.service.BookService;
@@ -73,6 +74,23 @@ public class BookServiceImplementation implements BookService {
 
         bookRepository.save(book);
 
+        return book;
+    }
+
+    @Override
+    public Book rentCopiesFromBook(Long bookId, int numberOfCopies) {
+        Book book = bookRepository.findById(bookId).orElseThrow(InvalidBookIdException::new);
+
+
+        if(book.getAvailableCopies() - numberOfCopies >= 0)
+        {
+            book.setAvailableCopies(book.getAvailableCopies()-numberOfCopies);
+            bookRepository.save(book);
+        }
+        else
+        {
+            throw new NotEnoughNumberOfCopiesException();
+        }
         return book;
     }
 }

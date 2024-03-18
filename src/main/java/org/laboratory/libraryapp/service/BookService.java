@@ -67,4 +67,14 @@ public interface BookService {
      * @throws org.laboratory.libraryapp.model.exceptions.InvalidBookIdException when there is no Book with the given id
      */
     Book changeRentedStatus(Long bookId, boolean status);
+
+    /**
+     * Method that should change the number of available copies from certain book. If the id is invalid, it should throw InvalidBookIdException.
+     *
+     * @param bookId Id of the Book
+     * @param numberOfCopies Number of copies to rent
+     * @return The Book that is deleted.
+     * @throws org.laboratory.libraryapp.model.exceptions.InvalidBookIdException when there is no Book with the given id
+     */
+    Book rentCopiesFromBook(Long bookId, int numberOfCopies);
 }
