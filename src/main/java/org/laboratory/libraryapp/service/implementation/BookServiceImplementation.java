@@ -2,6 +2,9 @@ package org.laboratory.libraryapp.service.implementation;
 
 import org.laboratory.libraryapp.model.Book;
 import org.laboratory.libraryapp.model.Category;
+import org.laboratory.libraryapp.model.events.BookCreatedEvent;
+import org.laboratory.libraryapp.model.events.BookDeletedEvent;
+import org.laboratory.libraryapp.model.events.BookUpdatedEvent;
 import org.laboratory.libraryapp.model.exceptions.InvalidAuthorIdException;
 import org.laboratory.libraryapp.model.exceptions.InvalidBookIdException;
 import org.laboratory.libraryapp.model.exceptions.InvalidCountryIdException;
@@ -9,6 +12,7 @@ import org.laboratory.libraryapp.model.exceptions.NotEnoughNumberOfCopiesExcepti
 import org.laboratory.libraryapp.repository.AuthorRepository;
 import org.laboratory.libraryapp.repository.BookRepository;
 import org.laboratory.libraryapp.service.BookService;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,9 +23,12 @@ public class BookServiceImplementation implements BookService {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
 
-    public BookServiceImplementation(BookRepository bookRepository, AuthorRepository authorRepository) {
+    private final ApplicationEventPublisher applicationEventPublisher;
+
+    public BookServiceImplementation(BookRepository bookRepository, AuthorRepository authorRepository, ApplicationEventPublisher applicationEventPublisher) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
     @Override
@@ -40,6 +47,8 @@ public class BookServiceImplementation implements BookService {
 
         bookRepository.save(book);
 
+        this.applicationEventPublisher.publishEvent(new BookCreatedEvent(book));
+
         return book;
     }
 
@@ -54,12 +63,16 @@ public class BookServiceImplementation implements BookService {
 
         bookRepository.save(book);
 
+        this.applicationEventPublisher.publishEvent(new BookUpdatedEvent(book));
+
         return book;
     }
 
     @Override
     public Book delete(Long id) {
         Book book = bookRepository.findById(id).orElseThrow(InvalidBookIdException::new);
+
+        this.applicationEventPublisher.publishEvent(new BookDeletedEvent(book));
 
         bookRepository.delete(book);
 
