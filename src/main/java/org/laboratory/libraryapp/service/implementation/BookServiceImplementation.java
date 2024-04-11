@@ -106,4 +106,19 @@ public class BookServiceImplementation implements BookService {
         }
         return book;
     }
+
+    @Override
+    public Book rentCopyFromBook(Long id) {
+        Book book = bookRepository.findById(id).orElseThrow(InvalidBookIdException::new);
+        if(book.getAvailableCopies() - 1 >= 0)
+        {
+            book.setAvailableCopies(book.getAvailableCopies()-1);
+            bookRepository.save(book);
+        }
+        else
+        {
+            throw new NotEnoughNumberOfCopiesException();
+        }
+        return book;
+    }
 }

@@ -11,25 +11,24 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:3000"})
+@RequestMapping(value = {"/api/authors"})
 public class AuthorRestController {
 
     private final AuthorService authorService;
 
-    @CrossOrigin()
-    @GetMapping("/authors")
+    @GetMapping
     public List<Author> showAllAuthors()
     {
         return this.authorService.listAllAuthors();
     }
 
-    @CrossOrigin()
     @PostMapping(value = "/addAuthor", consumes = MediaType.APPLICATION_JSON_VALUE )
     public void addAuthor(@RequestBody AuthorDto author)
     {
         this.authorService.create(author.getName(), author.getSurname(), author.getCountryId());
     }
 
-    @CrossOrigin
     @PostMapping(value = "/deleteAuthor/{id}")
     public void deleteAuthor(@PathVariable Long id)
     {
@@ -37,7 +36,6 @@ public class AuthorRestController {
     }
 
 
-    @CrossOrigin
     @PostMapping(value = "/editAuthor/{id}")
     public void editAuthor(@PathVariable Long id, @RequestBody AuthorDto author)
     {

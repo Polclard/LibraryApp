@@ -77,4 +77,6 @@ public interface BookService {
      * @throws org.laboratory.libraryapp.model.exceptions.InvalidBookIdException when there is no Book with the given id
      */
     Book rentCopiesFromBook(Long bookId, int numberOfCopies);
+
+    Book rentCopyFromBook(Long id);
 }

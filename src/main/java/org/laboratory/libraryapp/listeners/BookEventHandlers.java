@@ -1,6 +1,5 @@
 package org.laboratory.libraryapp.listeners;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.laboratory.libraryapp.model.events.BookCreatedEvent;
 import org.laboratory.libraryapp.model.events.BookDeletedEvent;
@@ -24,7 +23,6 @@ public class BookEventHandlers {
     {
         System.out.println("Book with name: " + event.getTheBook().getName() + " is deleted at: " + event.getWhen());
     }
-
     @EventListener
     public void onBookUpdate(BookUpdatedEvent event)
     {
